@@ -48,6 +48,29 @@ a{color:inherit;text-decoration:none}
 button{font:inherit;cursor:pointer;border:none;background:none}
 h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.1}
 
+/* ============ LANG TOGGLE ============ */
+.lang-toggle{
+  display:inline-flex;align-items:center;
+  background:var(--red-light);border:1.5px solid var(--divider);
+  border-radius:100px;overflow:hidden;
+  font-family:var(--font-display);font-weight:700;font-size:var(--t-xs);
+  letter-spacing:0.08em;
+}
+.lang-toggle button{
+  padding:7px 14px;color:var(--muted);
+  background:transparent;border:none;cursor:pointer;
+  transition:background 180ms, color 180ms;
+  text-transform:uppercase;
+}
+.lang-toggle button.active{background:var(--red);color:#fff}
+.lang-toggle button:first-child{border-radius:100px 0 0 100px}
+.lang-toggle button:last-child{border-radius:0 100px 100px 0}
+.lang-toggle--mobile{
+  background:rgba(255,255,255,0.15);border-color:rgba(255,255,255,0.3);
+}
+.lang-toggle--mobile button{color:rgba(255,255,255,0.7)}
+.lang-toggle--mobile button.active{background:var(--gold);color:var(--text)}
+
 /* ============ NAV ============ */
 .nav{
   position:sticky;top:0;left:0;right:0;height:104px;z-index:100;
@@ -62,7 +85,6 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.1}
   backdrop-filter:blur(10px);
   -webkit-backdrop-filter:blur(10px);
 }
-.nav{height:104px}
 .nav__logo{display:flex;align-items:center;height:104px}
 .nav__logo img{height:104px;width:auto;display:block}
 .nav__links{display:flex;align-items:center;gap:28px}
@@ -74,6 +96,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.1}
 }
 .nav__links a:hover{color:var(--red)}
 .nav__links a.active{color:var(--red);border-bottom-color:var(--gold)}
+.nav__right{display:flex;align-items:center;gap:12px}
 .nav__cta{
   display:inline-flex;align-items:center;gap:8px;
   background:var(--red);color:#fff;padding:10px 20px;border-radius:6px;
@@ -99,7 +122,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.1}
 
 @media (max-width:768px){
   .nav__links{display:none}
-  .nav__cta{display:none}
+  .nav__right .nav__cta{display:none}
   .nav__burger{display:inline-flex}
 }
 
@@ -382,7 +405,6 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.1}
   font-family:var(--font-body);font-weight:600;font-size:var(--t-xs);letter-spacing:0.04em;
 }
 
-
 /* ============ CONTACT ============ */
 .contact{background:var(--red-light);text-align:center}
 .contact__cards{
@@ -483,17 +505,23 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.1}
     <img src="assets/qc-logo.png" alt="QC Quinta Caporales Meat Market" />
   </a>
   <nav class="nav__links" aria-label="Primary">
-    <a href="#home" class="active">Home</a>
-    <a href="#departments">Departments</a>
-    <a href="#market">Public Market</a>
-    <a href="#specials">Specials</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
+    <a href="#home" class="active" data-i18n="nav.home">Home</a>
+    <a href="#departments" data-i18n="nav.departments">Departments</a>
+    <a href="#market" data-i18n="nav.market">Public Market</a>
+    <a href="#specials" data-i18n="nav.specials">Specials</a>
+    <a href="#about" data-i18n="nav.about">About</a>
+    <a href="#contact" data-i18n="nav.contact">Contact</a>
   </nav>
-  <a href="tel:+15125551234" class="nav__cta">
-    <i data-lucide="phone" style="width:16px;height:16px"></i>
-    Call Us
-  </a>
+  <div class="nav__right">
+    <div class="lang-toggle" role="group" aria-label="Language">
+      <button id="btnEn" class="active" onclick="setLang('en')">EN</button>
+      <button id="btnEs" onclick="setLang('es')">ES</button>
+    </div>
+    <a href="tel:+15125551234" class="nav__cta">
+      <i data-lucide="phone" style="width:16px;height:16px"></i>
+      <span data-i18n="nav.call">Call Us</span>
+    </a>
+  </div>
   <button class="nav__burger" id="burger" aria-label="Open menu">
     <i data-lucide="menu" style="width:28px;height:28px"></i>
   </button>
@@ -503,13 +531,17 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.1}
   <button class="mobile-nav__close" id="mobileClose" aria-label="Close menu">
     <i data-lucide="x" style="width:32px;height:32px"></i>
   </button>
-  <a href="#home">Home</a>
-  <a href="#departments">Departments</a>
-  <a href="#market">Public Market</a>
-  <a href="#specials">Specials</a>
-  <a href="#about">About</a>
-  <a href="#contact">Contact</a>
+  <a href="#home" data-i18n="nav.home">Home</a>
+  <a href="#departments" data-i18n="nav.departments">Departments</a>
+  <a href="#market" data-i18n="nav.market">Public Market</a>
+  <a href="#specials" data-i18n="nav.specials">Specials</a>
+  <a href="#about" data-i18n="nav.about">About</a>
+  <a href="#contact" data-i18n="nav.contact">Contact</a>
   <a href="tel:+15125551234" style="color:var(--gold)">📞 (512) 555-1234</a>
+  <div class="lang-toggle lang-toggle--mobile" role="group" aria-label="Language">
+    <button id="btnEnMobile" class="active" onclick="setLang('en')">English</button>
+    <button id="btnEsMobile" onclick="setLang('es')">Español</button>
+  </div>
 </div>
 
 <!-- ============== HERO ============== -->
@@ -519,19 +551,19 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.1}
   <div class="hero__inner">
     <span class="hero__pill">
       <i data-lucide="map-pin" style="width:13px;height:13px"></i>
-      San Marcos, Texas · Since 1990s
+      <span data-i18n="hero.pill">San Marcos, Texas · Since 1990s</span>
     </span>
-    <h1>San Marcos' Freshest <span class="accent">Meat Market</span></h1>
-    <p class="lead">Fresh cuts, authentic flavors, and a full taqueria — serving the San Marcos community with quality you can taste.</p>
+    <h1 data-i18n-html="hero.h1">San Marcos' Freshest <span class="accent">Meat Market</span></h1>
+    <p class="lead" data-i18n="hero.lead">Fresh cuts, authentic flavors, and a full taqueria — serving the San Marcos community with quality you can taste.</p>
     <div class="hero__ctas">
-      <a href="#departments" class="btn-primary">See Our Departments →</a>
-      <a href="#market" class="btn-outline">Public Market Events</a>
+      <a href="#departments" class="btn-primary" data-i18n="hero.cta1">See Our Departments →</a>
+      <a href="#market" class="btn-outline" data-i18n="hero.cta2">Public Market Events</a>
     </div>
     <div class="hero__stats">
-      <div class="hero__stat"><span class="num">30+</span><span class="lab">Years Serving</span></div>
-      <div class="hero__stat"><span class="num">500+</span><span class="lab">Products</span></div>
-      <div class="hero__stat"><span class="num">7 Days</span><span class="lab">a Week</span></div>
-      <div class="hero__stat"><span class="num">Full</span><span class="lab">Taqueria</span></div>
+      <div class="hero__stat"><span class="num">30+</span><span class="lab" data-i18n="hero.stat1">Years Serving</span></div>
+      <div class="hero__stat"><span class="num">500+</span><span class="lab" data-i18n="hero.stat2">Products</span></div>
+      <div class="hero__stat"><span class="num">7</span><span class="lab" data-i18n="hero.stat3">Days a Week</span></div>
+      <div class="hero__stat"><span class="num">Full</span><span class="lab" data-i18n="hero.stat4">Taqueria</span></div>
     </div>
   </div>
 </section>
@@ -539,48 +571,48 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.1}
 <!-- ============== DEPARTMENTS ============== -->
 <section class="section depts" id="departments">
   <div class="container">
-    <span class="overline">Everything You Need</span>
-    <h2 class="section-h2">One Stop. All Fresh.</h2>
-    <p class="section-lede">From fresh-cut meats to the full produce wall — everything your family needs under one roof.</p>
+    <span class="overline" data-i18n="depts.overline">Everything You Need</span>
+    <h2 class="section-h2" data-i18n="depts.h2">One Stop. All Fresh.</h2>
+    <p class="section-lede" data-i18n="depts.lede">From fresh-cut meats to the full produce wall — everything your family needs under one roof.</p>
     <div class="depts__grid">
       <div class="dept-card">
         <div class="dept-card__icon"><i data-lucide="beef" style="width:28px;height:28px"></i></div>
-        <h3>Carnicería</h3>
-        <p>Premium fresh-cut beef, pork, and chicken. Custom cuts available daily.</p>
+        <h3 data-i18n="depts.c1.name">Carnicería</h3>
+        <p data-i18n="depts.c1.desc">Premium fresh-cut beef, pork, and chicken. Custom cuts available daily.</p>
       </div>
       <div class="dept-card">
         <div class="dept-card__icon"><i data-lucide="salad" style="width:28px;height:28px"></i></div>
-        <h3>Produce</h3>
-        <p>A full wall of fresh vegetables and fruits — priced for families.</p>
+        <h3 data-i18n="depts.c2.name">Produce</h3>
+        <p data-i18n="depts.c2.desc">A full wall of fresh vegetables and fruits — priced for families.</p>
       </div>
       <div class="dept-card">
         <div class="dept-card__icon"><i data-lucide="utensils" style="width:28px;height:28px"></i></div>
-        <h3>Taqueria</h3>
-        <p>Breakfast, lunch, tacos, tortas, and daily specials. Dine in or carry out.</p>
+        <h3 data-i18n="depts.c3.name">Taqueria</h3>
+        <p data-i18n="depts.c3.desc">Breakfast, lunch, tacos, tortas, and daily specials. Dine in or carry out.</p>
       </div>
       <div class="dept-card">
         <div class="dept-card__icon"><i data-lucide="shopping-basket" style="width:28px;height:28px"></i></div>
-        <h3>Groceries</h3>
-        <p>Mexican pantry staples, spices, dry goods, and everything in between.</p>
+        <h3 data-i18n="depts.c4.name">Groceries</h3>
+        <p data-i18n="depts.c4.desc">Mexican pantry staples, spices, dry goods, and everything in between.</p>
       </div>
       <div class="dept-card">
         <div class="dept-card__icon"><i data-lucide="fish" style="width:28px;height:28px"></i></div>
-        <h3>Seafood</h3>
-        <p>Fresh seafood selection — perfect for weekend ceviche and cooking.</p>
+        <h3 data-i18n="depts.c5.name">Seafood</h3>
+        <p data-i18n="depts.c5.desc">Fresh seafood selection — perfect for weekend ceviche and cooking.</p>
       </div>
       <div class="dept-card">
         <div class="dept-card__icon"><i data-lucide="cake" style="width:28px;height:28px"></i></div>
-        <h3>Panadería</h3>
-        <p>Freshly baked pan dulce, tortillas, and traditional Mexican breads.</p>
+        <h3 data-i18n="depts.c6.name">Panadería</h3>
+        <p data-i18n="depts.c6.desc">Freshly baked pan dulce, tortillas, and traditional Mexican breads.</p>
       </div>
     </div>
 
     <div class="dept-feature">
       <div class="dept-feature__img" style="background-image:url('assets/meat-counter-1.jpg')" role="img" aria-label="Fresh-cut meat counter at QC Meat Market"></div>
       <div class="dept-feature__body">
-        <span class="tag">Featured · Carnicería</span>
-        <h3>Cut Fresh Behind the Counter</h3>
-        <p>Our butchers cut every steak, chop, and roast to order — bistec, fajita, milanesa, costilla, and more. Ask for what you need; we'll have it ready.</p>
+        <span class="tag" data-i18n="depts.feat.tag">Featured · Carnicería</span>
+        <h3 data-i18n="depts.feat.h3">Cut Fresh Behind the Counter</h3>
+        <p data-i18n="depts.feat.p">Our butchers cut every steak, chop, and roast to order — bistec, fajita, milanesa, costilla, and more. Ask for what you need; we'll have it ready.</p>
       </div>
     </div>
   </div>
@@ -590,31 +622,31 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.1}
 <section class="section market" id="market">
   <div class="market__grid">
     <div>
-      <span class="market__pill">Upcoming Event</span>
-      <h2>QC Public Market</h2>
-      <p class="market__lead">Join us every Sunday for the QC Public Market — vendors, DJ, kids attractions, and the full community. Free entry for everyone.</p>
+      <span class="market__pill" data-i18n="market.pill">Upcoming Event</span>
+      <h2 data-i18n="market.h2">QC Public Market</h2>
+      <p class="market__lead" data-i18n="market.lead">Join us every Sunday for the QC Public Market — vendors, DJ, kids attractions, and the full community. Free entry for everyone.</p>
       <div class="market__details">
-        <div class="market__row"><i data-lucide="calendar" style="width:18px;height:18px"></i> Every Sunday · 12 PM – 5 PM</div>
-        <div class="market__row"><i data-lucide="map-pin" style="width:18px;height:18px"></i> 1105 TX Hwy 125, San Marcos, Texas</div>
-        <div class="market__row"><i data-lucide="music" style="width:18px;height:18px"></i> Live DJ · Vendors · Kids Attractions</div>
-        <div class="market__row"><i data-lucide="users" style="width:18px;height:18px"></i> Free Entry — All Welcome</div>
+        <div class="market__row"><i data-lucide="calendar" style="width:18px;height:18px"></i> <span data-i18n="market.row1">Every Sunday · 12 PM – 5 PM</span></div>
+        <div class="market__row"><i data-lucide="map-pin" style="width:18px;height:18px"></i> <span>1105 TX Hwy 125, San Marcos, Texas</span></div>
+        <div class="market__row"><i data-lucide="music" style="width:18px;height:18px"></i> <span data-i18n="market.row3">Live DJ · Vendors · Kids Attractions</span></div>
+        <div class="market__row"><i data-lucide="users" style="width:18px;height:18px"></i> <span data-i18n="market.row4">Free Entry — All Welcome</span></div>
       </div>
-      <a class="btn-primary market__cta" href="https://maps.google.com/?q=1105+TX+Hwy+125+San+Marcos+TX" target="_blank" rel="noopener noreferrer">Get Directions →</a>
+      <a class="btn-primary market__cta" href="https://maps.google.com/?q=1105+TX+Hwy+125+San+Marcos+TX" target="_blank" rel="noopener noreferrer" data-i18n="market.cta">Get Directions →</a>
     </div>
     <div class="poster">
-      <div class="poster__date-bar">This Sunday · April 19</div>
-      <div class="poster__eyebrow">This Sunday</div>
-      <div class="poster__title">Public Market</div>
+      <div class="poster__date-bar" data-i18n="poster.datebar">This Sunday · April 19</div>
+      <div class="poster__eyebrow" data-i18n="poster.eyebrow">This Sunday</div>
+      <div class="poster__title" data-i18n="poster.title">Public Market</div>
       <div class="poster__sub">@ QC Meat Market</div>
       <div class="poster__divider"></div>
       <div class="poster__badges">
         <span class="badge">🎵 Live DJ</span>
-        <span class="badge">🛍️ Vendors</span>
-        <span class="badge">🎡 Kids Fun</span>
+        <span class="badge" data-i18n="poster.badge.vendors">🛍️ Vendors</span>
+        <span class="badge" data-i18n="poster.badge.kids">🎡 Kids Fun</span>
       </div>
       <div class="poster__addr">
         1105 TX Hwy 125 · San Marcos, TX<br>
-        Every Sunday · 12 PM – 5 PM
+        <span data-i18n="market.row1">Every Sunday · 12 PM – 5 PM</span>
       </div>
     </div>
   </div>
@@ -623,15 +655,15 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.1}
 <!-- ============== SPECIALS ============== -->
 <section class="section specials" id="specials">
   <div class="container">
-    <span class="overline">Taqueria Menu Highlights</span>
-    <h2 class="section-h2">Made Fresh Every Day</h2>
-    <p class="section-lede">Full breakfast, lunch, tacos, tortas, carnes, and daily specials. Dine in at the taqueria counter or take it to go.</p>
+    <span class="overline" data-i18n="specials.overline">Taqueria Menu Highlights</span>
+    <h2 class="section-h2" data-i18n="specials.h2">Made Fresh Every Day</h2>
+    <p class="section-lede" data-i18n="specials.lede">Full breakfast, lunch, tacos, tortas, carnes, and daily specials. Dine in at the taqueria counter or take it to go.</p>
     <div class="tabs" role="tablist">
-      <button class="tab active" data-cat="breakfast" role="tab">Breakfast</button>
-      <button class="tab" data-cat="tacos" role="tab">Tacos</button>
-      <button class="tab" data-cat="tortas" role="tab">Tortas</button>
-      <button class="tab" data-cat="speciales" role="tab">Speciales</button>
-      <button class="tab" data-cat="carnes" role="tab">Carnes</button>
+      <button class="tab active" data-cat="breakfast" role="tab" data-i18n="tab.breakfast">Breakfast</button>
+      <button class="tab" data-cat="tacos" role="tab" data-i18n="tab.tacos">Tacos</button>
+      <button class="tab" data-cat="tortas" role="tab" data-i18n="tab.tortas">Tortas</button>
+      <button class="tab" data-cat="speciales" role="tab" data-i18n="tab.speciales">Speciales</button>
+      <button class="tab" data-cat="carnes" role="tab" data-i18n="tab.carnes">Carnes</button>
     </div>
     <div class="menu-grid" id="menuGrid"></div>
   </div>
@@ -641,28 +673,28 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.1}
 <section class="section about" id="about">
   <div class="container about__grid">
     <div>
-      <span class="overline">About QC Meat Market</span>
-      <h2 class="section-h2">A San Marcos Institution</h2>
-      <p class="body">Quinta Caporales Meat Market has been serving the San Marcos community for decades. We started as a neighborhood carnicería and grew into a full-service market with fresh produce, a taqueria, bakery, and now a weekly public market that brings the whole community together.</p>
-      <p class="body">Everything we sell is chosen with care and priced for real families. No corporate fluff — just quality food and honest service, every single day.</p>
+      <span class="overline" data-i18n="about.overline">About QC Meat Market</span>
+      <h2 class="section-h2" data-i18n="about.h2">A San Marcos Institution</h2>
+      <p class="body" data-i18n="about.p1">Quinta Caporales Meat Market has been serving the San Marcos community for decades. We started as a neighborhood carnicería and grew into a full-service market with fresh produce, a taqueria, bakery, and now a weekly public market that brings the whole community together.</p>
+      <p class="body" data-i18n="about.p2">Everything we sell is chosen with care and priced for real families. No corporate fluff — just quality food and honest service, every single day.</p>
       <div class="hours-block">
-        <h3>Store Hours</h3>
+        <h3 data-i18n="about.hours.h3">Store Hours</h3>
         <div class="hours-list">
-          <div class="hours-row"><strong>Monday – Friday</strong><span>7:00 AM – 9:00 PM</span></div>
-          <div class="hours-row"><strong>Saturday</strong><span>7:00 AM – 9:00 PM</span></div>
-          <div class="hours-row"><strong>Sunday <span class="pill">Public Market 12–5</span></strong><span>7:00 AM – 9:00 PM</span></div>
+          <div class="hours-row"><strong data-i18n="about.hours.mf">Monday – Friday</strong><span>7:00 AM – 9:00 PM</span></div>
+          <div class="hours-row"><strong data-i18n="about.hours.sat">Saturday</strong><span>7:00 AM – 9:00 PM</span></div>
+          <div class="hours-row"><strong><span data-i18n="about.hours.sun">Sunday</span> <span class="pill" data-i18n="about.hours.pill">Public Market 12–5</span></strong><span>7:00 AM – 9:00 PM</span></div>
         </div>
       </div>
     </div>
     <div class="about__visuals" aria-hidden="true">
       <div class="viz viz--hero">
-        <span class="viz__label">Fresh Produce Wall</span>
+        <span class="viz__label" data-i18n="viz.produce">Fresh Produce Wall</span>
       </div>
       <div class="viz viz--gold">
         <span class="viz__label">Panadería · Pan Dulce</span>
       </div>
       <div class="viz viz--green">
-        <span class="viz__label">Carnicería Counter</span>
+        <span class="viz__label" data-i18n="viz.carniceria">Carnicería Counter</span>
       </div>
     </div>
   </div>
@@ -670,29 +702,29 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.1}
 
 <!-- ============== CONTACT ============== -->
 <section class="section contact" id="contact">
-  <span class="overline">Find Us</span>
-  <h2 class="section-h2">Come See Us in San Marcos</h2>
-  <p class="section-lede" style="margin-left:auto;margin-right:auto;max-width:48ch">Walk in anytime — no appointment needed. We're open 7 days a week.</p>
+  <span class="overline" data-i18n="contact.overline">Find Us</span>
+  <h2 class="section-h2" data-i18n="contact.h2">Come See Us in San Marcos</h2>
+  <p class="section-lede" style="margin-left:auto;margin-right:auto;max-width:48ch" data-i18n="contact.lede">Walk in anytime — no appointment needed. We're open 7 days a week.</p>
   <div class="contact__cards">
     <div class="contact-card">
       <i data-lucide="map-pin" style="width:32px;height:32px;color:var(--red)"></i>
-      <h3>Address</h3>
+      <h3 data-i18n="contact.addr.h3">Address</h3>
       <p>1105 TX Hwy 125<br>San Marcos, Texas 78666</p>
-      <a class="btn-card" href="https://maps.google.com/?q=1105+TX+Hwy+125+San+Marcos+TX" target="_blank" rel="noopener noreferrer">Get Directions →</a>
+      <a class="btn-card" href="https://maps.google.com/?q=1105+TX+Hwy+125+San+Marcos+TX" target="_blank" rel="noopener noreferrer" data-i18n="contact.addr.btn">Get Directions →</a>
     </div>
     <div class="contact-card">
       <i data-lucide="phone" style="width:32px;height:32px;color:var(--green)"></i>
-      <h3>Call Us</h3>
+      <h3 data-i18n="contact.phone.h3">Call Us</h3>
       <p class="big">(512) 555-1234</p>
-      <p>Mon–Sun · 7AM–9PM</p>
-      <a class="btn-card green" href="tel:+15125551234">Call Now →</a>
+      <p data-i18n="contact.phone.hours">Mon–Sun · 7AM–9PM</p>
+      <a class="btn-card green" href="tel:+15125551234" data-i18n="contact.phone.btn">Call Now →</a>
     </div>
     <div class="contact-card">
       <i data-lucide="clock" style="width:32px;height:32px;color:var(--gold-dark)"></i>
-      <h3>Hours</h3>
-      <p class="big">Mon – Sun</p>
+      <h3 data-i18n="contact.hours.h3">Hours</h3>
+      <p class="big" data-i18n="contact.hours.days">Mon – Sun</p>
       <p>7:00 AM – 9:00 PM</p>
-      <span class="pill-red">Public Market Sundays 12–5 PM</span>
+      <span class="pill-red" data-i18n="contact.hours.pill">Public Market Sundays 12–5 PM</span>
     </div>
   </div>
 </section>
@@ -702,75 +734,305 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.1}
   <div class="footer__grid">
     <div class="footer__brand">
       <img class="logo" src="assets/qc-logo.png" alt="QC Quinta Caporales Meat Market" />
-      <p>Your neighborhood market in San Marcos, TX. Fresh meats, produce, taqueria &amp; more — 7 days a week.</p>
+      <p data-i18n="footer.brand.p">Your neighborhood market in San Marcos, TX. Fresh meats, produce, taqueria &amp; more — 7 days a week.</p>
       <a class="footer__phone" href="tel:+15125551234">(512) 555-1234</a>
       <p class="footer__addr">1105 TX Hwy 125 · San Marcos, TX 78666</p>
     </div>
     <div class="footer__col">
-      <h4>Departments</h4>
-      <a href="#departments">Carnicería</a>
-      <a href="#departments">Produce</a>
-      <a href="#specials">Taqueria</a>
-      <a href="#departments">Groceries</a>
-      <a href="#departments">Seafood</a>
-      <a href="#departments">Panadería</a>
+      <h4 data-i18n="footer.col1.h4">Departments</h4>
+      <a href="#departments" data-i18n="depts.c1.name">Carnicería</a>
+      <a href="#departments" data-i18n="depts.c2.name">Produce</a>
+      <a href="#specials" data-i18n="depts.c3.name">Taqueria</a>
+      <a href="#departments" data-i18n="depts.c4.name">Groceries</a>
+      <a href="#departments" data-i18n="depts.c5.name">Seafood</a>
+      <a href="#departments" data-i18n="depts.c6.name">Panadería</a>
     </div>
     <div class="footer__col">
-      <h4>Visit Us</h4>
-      <p>Mon – Sun: 7AM – 9PM<br>Public Market: Sundays 12–5</p>
-      <a class="footer__directions" href="https://maps.google.com/?q=1105+TX+Hwy+125+San+Marcos+TX" target="_blank" rel="noopener noreferrer">Get Directions →</a>
+      <h4 data-i18n="footer.col2.h4">Visit Us</h4>
+      <p data-i18n="footer.col2.hours">Mon – Sun: 7AM – 9PM<br>Public Market: Sundays 12–5</p>
+      <a class="footer__directions" href="https://maps.google.com/?q=1105+TX+Hwy+125+San+Marcos+TX" target="_blank" rel="noopener noreferrer" data-i18n="contact.addr.btn">Get Directions →</a>
     </div>
   </div>
   <div class="footer__bar">
-    <span>© 2026 Quinta Caporales Meat Market · San Marcos, TX</span>
-    <span>All Rights Reserved</span>
+    <span data-i18n="footer.copy">© 2026 Quinta Caporales Meat Market · San Marcos, TX</span>
+    <span data-i18n="footer.rights">All Rights Reserved</span>
   </div>
 </footer>
 
 <!-- ============== MOBILE FLOATING BAR ============== -->
 <nav class="mobile-bar" aria-label="Quick actions">
-  <a href="tel:+15125551234">📞 Call Us</a>
-  <a href="https://maps.google.com/?q=1105+TX+Hwy+125+San+Marcos+TX" target="_blank" rel="noopener noreferrer">📍 Directions</a>
+  <a href="tel:+15125551234">📞 <span data-i18n="nav.call">Call Us</span></a>
+  <a href="https://maps.google.com/?q=1105+TX+Hwy+125+San+Marcos+TX" target="_blank" rel="noopener noreferrer">📍 <span data-i18n="mobile.directions">Directions</span></a>
 </nav>
 
 <script src="https://unpkg.com/lucide@latest"></script>
 <script>
+/* ============ TRANSLATIONS ============ */
+const T = {
+  en: {
+    'nav.home':'Home',
+    'nav.departments':'Departments',
+    'nav.market':'Public Market',
+    'nav.specials':'Specials',
+    'nav.about':'About',
+    'nav.contact':'Contact',
+    'nav.call':'Call Us',
+    'mobile.directions':'Directions',
+
+    'hero.pill':'San Marcos, Texas · Since 1990s',
+    'hero.h1':'San Marcos\' Freshest <span class="accent">Meat Market</span>',
+    'hero.lead':'Fresh cuts, authentic flavors, and a full taqueria — serving the San Marcos community with quality you can taste.',
+    'hero.cta1':'See Our Departments →',
+    'hero.cta2':'Public Market Events',
+    'hero.stat1':'Years Serving',
+    'hero.stat2':'Products',
+    'hero.stat3':'Days a Week',
+    'hero.stat4':'Taqueria',
+
+    'depts.overline':'Everything You Need',
+    'depts.h2':'One Stop. All Fresh.',
+    'depts.lede':'From fresh-cut meats to the full produce wall — everything your family needs under one roof.',
+    'depts.c1.name':'Carnicería',
+    'depts.c1.desc':'Premium fresh-cut beef, pork, and chicken. Custom cuts available daily.',
+    'depts.c2.name':'Produce',
+    'depts.c2.desc':'A full wall of fresh vegetables and fruits — priced for families.',
+    'depts.c3.name':'Taqueria',
+    'depts.c3.desc':'Breakfast, lunch, tacos, tortas, and daily specials. Dine in or carry out.',
+    'depts.c4.name':'Groceries',
+    'depts.c4.desc':'Mexican pantry staples, spices, dry goods, and everything in between.',
+    'depts.c5.name':'Seafood',
+    'depts.c5.desc':'Fresh seafood selection — perfect for weekend ceviche and cooking.',
+    'depts.c6.name':'Panadería',
+    'depts.c6.desc':'Freshly baked pan dulce, tortillas, and traditional Mexican breads.',
+    'depts.feat.tag':'Featured · Carnicería',
+    'depts.feat.h3':'Cut Fresh Behind the Counter',
+    'depts.feat.p':'Our butchers cut every steak, chop, and roast to order — bistec, fajita, milanesa, costilla, and more. Ask for what you need; we\'ll have it ready.',
+
+    'market.pill':'Upcoming Event',
+    'market.h2':'QC Public Market',
+    'market.lead':'Join us every Sunday for the QC Public Market — vendors, DJ, kids attractions, and the full community. Free entry for everyone.',
+    'market.row1':'Every Sunday · 12 PM – 5 PM',
+    'market.row3':'Live DJ · Vendors · Kids Attractions',
+    'market.row4':'Free Entry — All Welcome',
+    'market.cta':'Get Directions →',
+    'poster.datebar':'This Sunday · April 19',
+    'poster.eyebrow':'This Sunday',
+    'poster.title':'Public Market',
+    'poster.badge.vendors':'🛍️ Vendors',
+    'poster.badge.kids':'🎡 Kids Fun',
+
+    'specials.overline':'Taqueria Menu Highlights',
+    'specials.h2':'Made Fresh Every Day',
+    'specials.lede':'Full breakfast, lunch, tacos, tortas, carnes, and daily specials. Dine in at the taqueria counter or take it to go.',
+    'tab.breakfast':'Breakfast',
+    'tab.tacos':'Tacos',
+    'tab.tortas':'Tortas',
+    'tab.speciales':'Speciales',
+    'tab.carnes':'Carnes',
+
+    'about.overline':'About QC Meat Market',
+    'about.h2':'A San Marcos Institution',
+    'about.p1':'Quinta Caporales Meat Market has been serving the San Marcos community for decades. We started as a neighborhood carnicería and grew into a full-service market with fresh produce, a taqueria, bakery, and now a weekly public market that brings the whole community together.',
+    'about.p2':'Everything we sell is chosen with care and priced for real families. No corporate fluff — just quality food and honest service, every single day.',
+    'about.hours.h3':'Store Hours',
+    'about.hours.mf':'Monday – Friday',
+    'about.hours.sat':'Saturday',
+    'about.hours.sun':'Sunday',
+    'about.hours.pill':'Public Market 12–5',
+    'viz.produce':'Fresh Produce Wall',
+    'viz.carniceria':'Carnicería Counter',
+
+    'contact.overline':'Find Us',
+    'contact.h2':'Come See Us in San Marcos',
+    'contact.lede':'Walk in anytime — no appointment needed. We\'re open 7 days a week.',
+    'contact.addr.h3':'Address',
+    'contact.addr.btn':'Get Directions →',
+    'contact.phone.h3':'Call Us',
+    'contact.phone.hours':'Mon–Sun · 7AM–9PM',
+    'contact.phone.btn':'Call Now →',
+    'contact.hours.h3':'Hours',
+    'contact.hours.days':'Mon – Sun',
+    'contact.hours.pill':'Public Market Sundays 12–5 PM',
+
+    'footer.brand.p':'Your neighborhood market in San Marcos, TX. Fresh meats, produce, taqueria & more — 7 days a week.',
+    'footer.col1.h4':'Departments',
+    'footer.col2.h4':'Visit Us',
+    'footer.col2.hours':'Mon – Sun: 7AM – 9PM<br>Public Market: Sundays 12–5',
+    'footer.copy':'© 2026 Quinta Caporales Meat Market · San Marcos, TX',
+    'footer.rights':'All Rights Reserved',
+  },
+  es: {
+    'nav.home':'Inicio',
+    'nav.departments':'Departamentos',
+    'nav.market':'Mercado Público',
+    'nav.specials':'Especiales',
+    'nav.about':'Acerca de',
+    'nav.contact':'Contacto',
+    'nav.call':'Llámanos',
+    'mobile.directions':'Dirección',
+
+    'hero.pill':'San Marcos, Texas · Desde los 1990s',
+    'hero.h1':'El Mercado de Carnes Más Fresco de <span class="accent">San Marcos</span>',
+    'hero.lead':'Cortes frescos, sabores auténticos y una taquería completa — sirviendo a la comunidad de San Marcos con calidad que se nota.',
+    'hero.cta1':'Ver Nuestros Departamentos →',
+    'hero.cta2':'Eventos del Mercado Público',
+    'hero.stat1':'Años Sirviendo',
+    'hero.stat2':'Productos',
+    'hero.stat3':'Días a la Semana',
+    'hero.stat4':'Taquería',
+
+    'depts.overline':'Todo Lo Que Necesitas',
+    'depts.h2':'Una Parada. Todo Fresco.',
+    'depts.lede':'Desde carnes frescas hasta la pared de productos — todo lo que tu familia necesita bajo un mismo techo.',
+    'depts.c1.name':'Carnicería',
+    'depts.c1.desc':'Res, cerdo y pollo cortados al momento. Cortes personalizados disponibles diario.',
+    'depts.c2.name':'Verduras y Frutas',
+    'depts.c2.desc':'Una pared completa de verduras y frutas frescas — a precios para familias.',
+    'depts.c3.name':'Taquería',
+    'depts.c3.desc':'Desayunos, almuerzos, tacos, tortas y especiales del día. Para comer aquí o para llevar.',
+    'depts.c4.name':'Abarrotes',
+    'depts.c4.desc':'Abarrotes mexicanos, especias, secos y todo lo demás.',
+    'depts.c5.name':'Mariscos',
+    'depts.c5.desc':'Selección de mariscos frescos — perfectos para ceviche de fin de semana.',
+    'depts.c6.name':'Panadería',
+    'depts.c6.desc':'Pan dulce recién horneado, tortillas y panes mexicanos tradicionales.',
+    'depts.feat.tag':'Destacado · Carnicería',
+    'depts.feat.h3':'Cortado Fresco Detrás del Mostrador',
+    'depts.feat.p':'Nuestros carniceros cortan cada bistec, chuleta y asado al momento — bistec, fajita, milanesa, costilla y más. Pide lo que necesitas; lo tendremos listo.',
+
+    'market.pill':'Próximo Evento',
+    'market.h2':'Mercado Público QC',
+    'market.lead':'Únete a nosotros cada domingo en el Mercado Público QC — vendedores, DJ, diversión para niños y toda la comunidad. Entrada gratuita para todos.',
+    'market.row1':'Cada Domingo · 12 PM – 5 PM',
+    'market.row3':'DJ en Vivo · Vendedores · Diversión para Niños',
+    'market.row4':'Entrada Libre — Todos Bienvenidos',
+    'market.cta':'Cómo Llegar →',
+    'poster.datebar':'Este Domingo · 19 de Abril',
+    'poster.eyebrow':'Este Domingo',
+    'poster.title':'Mercado Público',
+    'poster.badge.vendors':'🛍️ Vendedores',
+    'poster.badge.kids':'🎡 Diversión para Niños',
+
+    'specials.overline':'Lo Mejor del Menú de la Taquería',
+    'specials.h2':'Hecho Fresco Cada Día',
+    'specials.lede':'Desayunos completos, almuerzos, tacos, tortas, carnes y especiales del día. Come aquí o llévalo.',
+    'tab.breakfast':'Desayuno',
+    'tab.tacos':'Tacos',
+    'tab.tortas':'Tortas',
+    'tab.speciales':'Especiales',
+    'tab.carnes':'Carnes',
+
+    'about.overline':'Sobre QC Meat Market',
+    'about.h2':'Una Institución de San Marcos',
+    'about.p1':'El Mercado de Carnes Quinta Caporales ha servido a la comunidad de San Marcos por décadas. Empezamos como una carnicería del barrio y crecimos hasta convertirnos en un mercado completo con verduras frescas, taquería, panadería y ahora un mercado público semanal que reúne a toda la comunidad.',
+    'about.p2':'Todo lo que vendemos es elegido con cuidado y tiene precios para familias de verdad. Sin lujos corporativos — solo comida de calidad y servicio honesto, todos los días.',
+    'about.hours.h3':'Horario de la Tienda',
+    'about.hours.mf':'Lunes – Viernes',
+    'about.hours.sat':'Sábado',
+    'about.hours.sun':'Domingo',
+    'about.hours.pill':'Mercado Público 12–5',
+    'viz.produce':'Pared de Verduras Frescas',
+    'viz.carniceria':'Mostrador de Carnicería',
+
+    'contact.overline':'Encuéntranos',
+    'contact.h2':'Visítanos en San Marcos',
+    'contact.lede':'Entra cuando quieras — sin cita previa. Abiertos 7 días a la semana.',
+    'contact.addr.h3':'Dirección',
+    'contact.addr.btn':'Cómo Llegar →',
+    'contact.phone.h3':'Llámanos',
+    'contact.phone.hours':'Lun–Dom · 7AM–9PM',
+    'contact.phone.btn':'Llamar Ahora →',
+    'contact.hours.h3':'Horario',
+    'contact.hours.days':'Lun – Dom',
+    'contact.hours.pill':'Mercado Público Domingos 12–5 PM',
+
+    'footer.brand.p':'Tu mercado del barrio en San Marcos, TX. Carnes frescas, verduras, taquería y más — 7 días a la semana.',
+    'footer.col1.h4':'Departamentos',
+    'footer.col2.h4':'Visítanos',
+    'footer.col2.hours':'Lun – Dom: 7AM – 9PM<br>Mercado Público: Domingos 12–5',
+    'footer.copy':'© 2026 Quinta Caporales Meat Market · San Marcos, TX',
+    'footer.rights':'Todos los Derechos Reservados',
+  }
+};
+
+/* ============ MENU DATA ============ */
 const MENU = {
   breakfast:[
-    {p:"$8",t:"Huevos Rancheros",d:"Eggs, salsa ranchera, beans, tortillas"},
-    {p:"$9",t:"Breakfast Burrito",d:"Eggs, chorizo, cheese, papas, flour tortilla"},
-    {p:"$7",t:"Chilaquiles",d:"Crispy tortilla chips in red or green salsa, crema"},
+    {p:"$8", t:"Huevos Rancheros",   d_en:"Eggs, salsa ranchera, beans, tortillas",                    d_es:"Huevos, salsa ranchera, frijoles, tortillas"},
+    {p:"$9", t:"Breakfast Burrito",  d_en:"Eggs, chorizo, cheese, papas, flour tortilla",               d_es:"Huevos, chorizo, queso, papas, tortilla de harina"},
+    {p:"$7", t:"Chilaquiles",        d_en:"Crispy tortilla chips in red or green salsa, crema",         d_es:"Totopos en salsa roja o verde, crema"},
   ],
   tacos:[
-    {p:"$3",t:"Taco de Asada",d:"Grilled beef, onion, cilantro, salsa"},
-    {p:"$3",t:"Taco de Carnitas",d:"Slow-cooked pork, onion, cilantro"},
-    {p:"$3",t:"Taco de Barbacoa",d:"Slow-cooked beef cheek, lime, cilantro"},
+    {p:"$3", t:"Taco de Asada",      d_en:"Grilled beef, onion, cilantro, salsa",                      d_es:"Carne asada a la parrilla, cebolla, cilantro, salsa"},
+    {p:"$3", t:"Taco de Carnitas",   d_en:"Slow-cooked pork, onion, cilantro",                         d_es:"Cerdo cocido a fuego lento, cebolla, cilantro"},
+    {p:"$3", t:"Taco de Barbacoa",   d_en:"Slow-cooked beef cheek, lime, cilantro",                    d_es:"Cachete de res cocido a fuego lento, limón, cilantro"},
   ],
   tortas:[
-    {p:"$10",t:"Torta de Milanesa",d:"Breaded beef, lettuce, tomato, avocado"},
-    {p:"$10",t:"Torta de Carnitas",d:"Slow pork, beans, cheese, jalapeño"},
-    {p:"$9",t:"Torta Cubana",d:"Mixed meats, cheese, jalapeño, everything"},
+    {p:"$10",t:"Torta de Milanesa",  d_en:"Breaded beef, lettuce, tomato, avocado",                    d_es:"Res empanizada, lechuga, tomate, aguacate"},
+    {p:"$10",t:"Torta de Carnitas",  d_en:"Slow pork, beans, cheese, jalapeño",                        d_es:"Cerdo cocido, frijoles, queso, jalapeño"},
+    {p:"$9", t:"Torta Cubana",       d_en:"Mixed meats, cheese, jalapeño, everything",                 d_es:"Carnes mixtas, queso, jalapeño, de todo"},
   ],
   speciales:[
-    {p:"$12",t:"Bistec con Papas",d:"Sautéed beef with potatoes, rice, beans"},
-    {p:"$13",t:"Chile Relleno",d:"Stuffed poblano, rice, beans, tortillas"},
-    {p:"$14",t:"Caldo de Res",d:"Beef soup with vegetables, served with tortillas"},
+    {p:"$12",t:"Bistec con Papas",   d_en:"Sautéed beef with potatoes, rice, beans",                   d_es:"Bistec salteado con papas, arroz, frijoles"},
+    {p:"$13",t:"Chile Relleno",      d_en:"Stuffed poblano, rice, beans, tortillas",                   d_es:"Poblano relleno, arroz, frijoles, tortillas"},
+    {p:"$14",t:"Caldo de Res",       d_en:"Beef soup with vegetables, served with tortillas",          d_es:"Caldo de res con verduras, servido con tortillas"},
   ],
   carnes:[
-    {p:"$8/lb",t:"Carne Asada",d:"Marinated grilled beef — ask about custom cuts"},
-    {p:"$7/lb",t:"Carnitas",d:"Slow-cooked pork — by the pound"},
-    {p:"$9/lb",t:"Barbacoa",d:"Weekend special — beef cheek, slow cooked"},
+    {p:"$8/lb",t:"Carne Asada",      d_en:"Marinated grilled beef — ask about custom cuts",            d_es:"Carne asada marinada — pregunta por cortes especiales"},
+    {p:"$7/lb",t:"Carnitas",         d_en:"Slow-cooked pork — by the pound",                          d_es:"Cerdo cocido a fuego lento — por libra"},
+    {p:"$9/lb",t:"Barbacoa",         d_en:"Weekend special — beef cheek, slow cooked",                d_es:"Especial de fin de semana — cachete de res cocido a fuego lento"},
   ],
 };
 
-function renderMenu(cat){
+/* ============ LANGUAGE ENGINE ============ */
+let currentLang = 'en';
+
+function applyLang(lang) {
+  const dict = T[lang];
+  document.documentElement.lang = lang;
+
+  // textContent nodes
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (dict[key] !== undefined) el.textContent = dict[key];
+  });
+
+  // innerHTML nodes (for elements with nested tags like <span class="accent">)
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const key = el.dataset.i18nHtml;
+    if (dict[key] !== undefined) el.innerHTML = dict[key];
+  });
+
+  // footer hours uses <br> so set via innerHTML
+  const footerHours = document.querySelector('[data-i18n="footer.col2.hours"]');
+  if (footerHours && dict['footer.col2.hours']) footerHours.innerHTML = dict['footer.col2.hours'];
+
+  // toggle button states
+  ['En','Es'].forEach(l => {
+    const btn = document.getElementById('btn' + l);
+    const btnM = document.getElementById('btn' + l + 'Mobile');
+    const active = l.toLowerCase() === lang;
+    if (btn) btn.classList.toggle('active', active);
+    if (btnM) btnM.classList.toggle('active', active);
+  });
+
+  currentLang = lang;
+  renderMenu(document.querySelector('.tab.active').dataset.cat);
+}
+
+function setLang(lang) {
+  applyLang(lang);
+}
+
+/* ============ MENU RENDER ============ */
+function renderMenu(cat) {
   const grid = document.getElementById('menuGrid');
   grid.innerHTML = MENU[cat].map(it => `
     <div class="menu-card">
       <div class="menu-card__price">${it.p}</div>
       <div>
         <h4>${it.t}</h4>
-        <p>${it.d}</p>
+        <p>${currentLang === 'es' ? it.d_es : it.d_en}</p>
       </div>
     </div>
   `).join('');
@@ -785,12 +1047,13 @@ document.querySelectorAll('.tab').forEach(t => {
   });
 });
 
+/* ============ NAV SCROLL ============ */
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
-  if (window.scrollY > 104) nav.classList.add('scrolled');
-  else nav.classList.remove('scrolled');
+  nav.classList.toggle('scrolled', window.scrollY > 104);
 });
 
+/* ============ MOBILE NAV ============ */
 const burger = document.getElementById('burger');
 const mobileNav = document.getElementById('mobileNav');
 const mobileClose = document.getElementById('mobileClose');
@@ -798,6 +1061,7 @@ burger.addEventListener('click', () => { mobileNav.classList.add('open'); mobile
 mobileClose.addEventListener('click', () => { mobileNav.classList.remove('open'); mobileNav.setAttribute('aria-hidden','true'); });
 mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { mobileNav.classList.remove('open'); mobileNav.setAttribute('aria-hidden','true'); }));
 
+/* ============ ACTIVE NAV LINK ============ */
 const sections = ['home','departments','market','specials','about','contact'];
 const navLinks = document.querySelectorAll('.nav__links a');
 window.addEventListener('scroll', () => {
