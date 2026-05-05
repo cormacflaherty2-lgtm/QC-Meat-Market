@@ -34,7 +34,7 @@
   --t-hero:clamp(2.5rem, 1rem + 5vw, 5.5rem);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;scroll-padding-top:120px}
+html{scroll-behavior:smooth;scroll-padding-top:224px}
 body{
   font-family:var(--font-body);
   color:var(--text);
@@ -73,7 +73,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.1}
 
 /* ============ NAV ============ */
 .nav{
-  position:sticky;top:0;left:0;right:0;height:104px;z-index:100;
+  position:sticky;top:0;left:0;right:0;height:208px;z-index:100;
   background:#fff;border-bottom:2px solid var(--red);
   display:flex;align-items:center;justify-content:space-between;
   padding:0 clamp(16px,5vw,80px);
@@ -85,8 +85,8 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.1}
   backdrop-filter:blur(10px);
   -webkit-backdrop-filter:blur(10px);
 }
-.nav__logo{display:flex;align-items:center;height:104px}
-.nav__logo img{height:104px;width:auto;display:block}
+.nav__logo{display:flex;align-items:center;height:208px}
+.nav__logo img{height:208px;width:auto;display:block}
 .nav__links{display:flex;align-items:center;gap:28px}
 .nav__links a{
   font-family:var(--font-display);font-weight:500;
@@ -445,7 +445,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.1}
   display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:48px;
 }
 @media (max-width:880px){.footer__grid{grid-template-columns:1fr;gap:32px}}
-.footer__brand img.logo{height:144px;margin-bottom:16px;display:block;filter:drop-shadow(0 4px 14px rgba(0,0,0,0.35))}
+.footer__brand img.logo{height:288px;margin-bottom:16px;display:block;filter:drop-shadow(0 4px 14px rgba(0,0,0,0.35))}
 .footer__brand p{color:rgba(255,255,255,0.55);font-size:var(--t-sm);max-width:28ch;line-height:1.7}
 .footer__phone{
   display:block;font-family:var(--font-display);font-weight:700;
@@ -1050,7 +1050,7 @@ document.querySelectorAll('.tab').forEach(t => {
 /* ============ NAV SCROLL ============ */
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 104);
+  nav.classList.toggle('scrolled', window.scrollY > 208);
 });
 
 /* ============ MOBILE NAV ============ */
