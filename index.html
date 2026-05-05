@@ -1039,12 +1039,12 @@ function renderMenu(cat) {
 }
 renderMenu('breakfast');
 
-document.querySelectorAll('.tab').forEach(t => {
-  t.addEventListener('click', () => {
-    document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
-    t.classList.add('active');
-    renderMenu(t.dataset.cat);
-  });
+document.querySelector('.tabs').addEventListener('click', e => {
+  const clicked = e.target.closest('.tab');
+  if (!clicked) return;
+  document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+  clicked.classList.add('active');
+  renderMenu(clicked.dataset.cat);
 });
 
 /* ============ NAV SCROLL ============ */
