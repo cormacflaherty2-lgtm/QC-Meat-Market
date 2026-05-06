@@ -334,37 +334,35 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.1}
 }
 @media (max-width:880px){.market__grid{grid-template-columns:1fr;gap:40px}}
 
-/* ============ SPECIALS ============ */
-.specials{background:var(--gold-light)}
-.tabs{margin-top:36px;display:flex;gap:8px;flex-wrap:wrap}
-.tab{
-  background:#fff;color:var(--text);border:1px solid var(--divider);
-  border-radius:100px;padding:10px 20px;
-  font-family:var(--font-display);font-weight:600;font-size:var(--t-sm);
-  cursor:pointer;transition:all 180ms;letter-spacing:0.04em;
+/* ============ PARTNERS ============ */
+.partners{background:var(--cream)}
+.partners__grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:48px;
 }
-.tab:hover{border-color:var(--red)}
-.tab.active{background:var(--red);color:#fff;border-color:var(--red)}
-.menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
-@media (max-width:880px){.menu-grid{grid-template-columns:1fr}}
-.menu-card{
-  background:#fff;border:1px solid var(--divider);border-radius:10px;padding:20px;
-  display:flex;align-items:flex-start;gap:16px;transition:transform 200ms, box-shadow 200ms;
+@media (max-width:640px){.partners__grid{grid-template-columns:1fr}}
+.partner-card{
+  background:#fff;border:1px solid var(--divider);border-radius:10px;
+  padding:28px 20px;transition:transform 220ms, box-shadow 220ms;
 }
-.menu-card:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(192,25,43,0.08)}
-.menu-card__price{
-  background:var(--red);color:#fff;border-radius:6px;padding:8px 12px;
-  font-family:var(--font-display);font-weight:700;font-size:var(--t-lg);
-  min-width:64px;text-align:center;flex-shrink:0;line-height:1.1;
+.partner-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(192,25,43,0.10)}
+.partner-card__icon{
+  width:64px;height:64px;border-radius:10px;background:var(--red-light);
+  display:flex;align-items:center;justify-content:center;margin-bottom:16px;
+  color:var(--red);
 }
-.menu-card h4{
-  font-family:var(--font-display);font-weight:600;font-size:var(--t-base);
-  color:var(--text);letter-spacing:0.02em;
+.partner-card h3{
+  font-family:var(--font-display);font-weight:600;font-size:var(--t-lg);
+  color:var(--text);letter-spacing:0.03em;margin-bottom:8px;
 }
-.menu-card p{
+.partner-card p{
   font-family:var(--font-body);font-size:var(--t-sm);color:var(--muted);
-  margin-top:4px;line-height:1.5;
+  line-height:1.55;margin-bottom:14px;
 }
+.partner-card__cta{
+  font-family:var(--font-display);font-weight:600;font-size:var(--t-sm);
+  color:var(--red);letter-spacing:0.03em;transition:color 180ms;
+}
+.partner-card__cta:hover{color:var(--red-dark)}
 
 /* ============ ABOUT ============ */
 .about{background:var(--cream)}
@@ -508,7 +506,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.1}
     <a href="#home" class="active" data-i18n="nav.home">Home</a>
     <a href="#departments" data-i18n="nav.departments">Departments</a>
     <a href="#market" data-i18n="nav.market">Public Market</a>
-    <a href="#specials" data-i18n="nav.specials">Specials</a>
+    <a href="#partners" data-i18n="nav.partners">Our Partners</a>
     <a href="#about" data-i18n="nav.about">About</a>
     <a href="#contact" data-i18n="nav.contact">Contact</a>
   </nav>
@@ -534,7 +532,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.1}
   <a href="#home" data-i18n="nav.home">Home</a>
   <a href="#departments" data-i18n="nav.departments">Departments</a>
   <a href="#market" data-i18n="nav.market">Public Market</a>
-  <a href="#specials" data-i18n="nav.specials">Specials</a>
+  <a href="#partners" data-i18n="nav.partners">Our Partners</a>
   <a href="#about" data-i18n="nav.about">About</a>
   <a href="#contact" data-i18n="nav.contact">Contact</a>
   <a href="tel:+15125551234" style="color:var(--gold)">📞 (512) 555-1234</a>
@@ -584,11 +582,6 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.1}
         <div class="dept-card__icon"><i data-lucide="salad" style="width:28px;height:28px"></i></div>
         <h3 data-i18n="depts.c2.name">Produce</h3>
         <p data-i18n="depts.c2.desc">A full wall of fresh vegetables and fruits — priced for families.</p>
-      </div>
-      <div class="dept-card">
-        <div class="dept-card__icon"><i data-lucide="utensils" style="width:28px;height:28px"></i></div>
-        <h3 data-i18n="depts.c3.name">Taqueria</h3>
-        <p data-i18n="depts.c3.desc">Breakfast, lunch, tacos, tortas, and daily specials. Dine in or carry out.</p>
       </div>
       <div class="dept-card">
         <div class="dept-card__icon"><i data-lucide="shopping-basket" style="width:28px;height:28px"></i></div>
@@ -652,24 +645,38 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.1}
   </div>
 </section>
 
-<!-- ============== SPECIALS ============== -->
-<section class="section specials" id="specials">
+<!-- ============== PARTNERS ============== -->
+<section class="section partners" id="partners">
   <div class="container">
-    <span class="overline" data-i18n="specials.overline">Taqueria Menu Highlights</span>
-    <h2 class="section-h2" data-i18n="specials.h2">Made Fresh Every Day</h2>
-    <p class="section-lede" data-i18n="specials.lede">Full breakfast, lunch, tacos, tortas, carnes, and daily specials. Dine in at the taqueria counter or take it to go.</p>
-    <div class="tabs" role="tablist">
-      <button class="tab active" data-tab="breakfast" data-cat="breakfast" role="tab" data-i18n="tab.breakfast">Breakfast</button>
-      <button class="tab" data-tab="tacos" data-cat="tacos" role="tab" data-i18n="tab.tacos">Tacos</button>
-      <button class="tab" data-tab="tortas" data-cat="tortas" role="tab" data-i18n="tab.tortas">Tortas</button>
-      <button class="tab" data-tab="speciales" data-cat="speciales" role="tab" data-i18n="tab.speciales">Speciales</button>
-      <button class="tab" data-tab="carnes" data-cat="carnes" role="tab" data-i18n="tab.carnes">Carnes</button>
+    <span class="overline">Inside QC Meat Market</span>
+    <h2 class="section-h2">Our Partners</h2>
+    <p class="section-lede">More than a market — a community of local businesses all under one roof.</p>
+    <div class="partners__grid">
+      <div class="partner-card">
+        <div class="partner-card__icon"><i data-lucide="utensils" style="width:28px;height:28px"></i></div>
+        <h3>Taqueria</h3>
+        <p>Breakfast, lunch, tacos, tortas, and daily specials made fresh. Dine in or carry out — located inside QC Meat Market.</p>
+        <a class="partner-card__cta" href="#">See Menu →</a>
+      </div>
+      <div class="partner-card">
+        <div class="partner-card__icon"><i data-lucide="gem" style="width:28px;height:28px"></i></div>
+        <h3>Jewelry</h3>
+        <p>Fine jewelry, custom pieces, and repairs. Browse our selection of gold, silver, and gemstone jewelry — inside the market.</p>
+        <a class="partner-card__cta" href="#">Visit Us →</a>
+      </div>
+      <div class="partner-card">
+        <div class="partner-card__icon"><i data-lucide="coffee" style="width:28px;height:28px"></i></div>
+        <h3>Snack Bar</h3>
+        <p>Quick bites, drinks, and snacks. The perfect stop while you shop — grab something fresh before you go.</p>
+        <a class="partner-card__cta" href="#">See What's Fresh →</a>
+      </div>
+      <div class="partner-card">
+        <div class="partner-card__icon"><i data-lucide="shield" style="width:28px;height:28px"></i></div>
+        <h3>Insurance &amp; Money Transfer</h3>
+        <p>Auto, home, and life insurance quotes plus fast money transfers. Convenient services right inside the market.</p>
+        <a class="partner-card__cta" href="#">Get a Quote →</a>
+      </div>
     </div>
-    <div class="menu-grid" data-panel="breakfast"></div>
-    <div class="menu-grid" data-panel="tacos" style="display:none"></div>
-    <div class="menu-grid" data-panel="tortas" style="display:none"></div>
-    <div class="menu-grid" data-panel="speciales" style="display:none"></div>
-    <div class="menu-grid" data-panel="carnes" style="display:none"></div>
   </div>
 </section>
 
@@ -746,7 +753,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.1}
       <h4 data-i18n="footer.col1.h4">Departments</h4>
       <a href="#departments" data-i18n="depts.c1.name">Carnicería</a>
       <a href="#departments" data-i18n="depts.c2.name">Produce</a>
-      <a href="#specials" data-i18n="depts.c3.name">Taqueria</a>
+      <a href="#partners">Our Partners</a>
       <a href="#departments" data-i18n="depts.c4.name">Groceries</a>
       <a href="#departments" data-i18n="depts.c5.name">Seafood</a>
       <a href="#departments" data-i18n="depts.c6.name">Panadería</a>
@@ -777,7 +784,7 @@ const T = {
     'nav.home':'Home',
     'nav.departments':'Departments',
     'nav.market':'Public Market',
-    'nav.specials':'Specials',
+    'nav.partners':'Our Partners',
     'nav.about':'About',
     'nav.contact':'Contact',
     'nav.call':'Call Us',
@@ -825,15 +832,6 @@ const T = {
     'poster.badge.vendors':'🛍️ Vendors',
     'poster.badge.kids':'🎡 Kids Fun',
 
-    'specials.overline':'Taqueria Menu Highlights',
-    'specials.h2':'Made Fresh Every Day',
-    'specials.lede':'Full breakfast, lunch, tacos, tortas, carnes, and daily specials. Dine in at the taqueria counter or take it to go.',
-    'tab.breakfast':'Breakfast',
-    'tab.tacos':'Tacos',
-    'tab.tortas':'Tortas',
-    'tab.speciales':'Speciales',
-    'tab.carnes':'Carnes',
-
     'about.overline':'About QC Meat Market',
     'about.h2':'A San Marcos Institution',
     'about.p1':'Quinta Caporales Meat Market has been serving the San Marcos community for decades. We started as a neighborhood carnicería and grew into a full-service market with fresh produce, a taqueria, bakery, and now a weekly public market that brings the whole community together.',
@@ -869,7 +867,7 @@ const T = {
     'nav.home':'Inicio',
     'nav.departments':'Departamentos',
     'nav.market':'Mercado Público',
-    'nav.specials':'Especiales',
+    'nav.partners':'Nuestros Socios',
     'nav.about':'Acerca de',
     'nav.contact':'Contacto',
     'nav.call':'Llámanos',
@@ -917,15 +915,6 @@ const T = {
     'poster.badge.vendors':'🛍️ Vendedores',
     'poster.badge.kids':'🎡 Diversión para Niños',
 
-    'specials.overline':'Lo Mejor del Menú de la Taquería',
-    'specials.h2':'Hecho Fresco Cada Día',
-    'specials.lede':'Desayunos completos, almuerzos, tacos, tortas, carnes y especiales del día. Come aquí o llévalo.',
-    'tab.breakfast':'Desayuno',
-    'tab.tacos':'Tacos',
-    'tab.tortas':'Tortas',
-    'tab.speciales':'Especiales',
-    'tab.carnes':'Carnes',
-
     'about.overline':'Sobre QC Meat Market',
     'about.h2':'Una Institución de San Marcos',
     'about.p1':'El Mercado de Carnes Quinta Caporales ha servido a la comunidad de San Marcos por décadas. Empezamos como una carnicería del barrio y crecimos hasta convertirnos en un mercado completo con verduras frescas, taquería, panadería y ahora un mercado público semanal que reúne a toda la comunidad.',
@@ -959,34 +948,6 @@ const T = {
   }
 };
 
-/* ============ MENU DATA ============ */
-const MENU = {
-  breakfast:[
-    {p:"$8", t:"Huevos Rancheros",   d_en:"Eggs, salsa ranchera, beans, tortillas",                    d_es:"Huevos, salsa ranchera, frijoles, tortillas"},
-    {p:"$9", t:"Breakfast Burrito",  d_en:"Eggs, chorizo, cheese, papas, flour tortilla",               d_es:"Huevos, chorizo, queso, papas, tortilla de harina"},
-    {p:"$7", t:"Chilaquiles",        d_en:"Crispy tortilla chips in red or green salsa, crema",         d_es:"Totopos en salsa roja o verde, crema"},
-  ],
-  tacos:[
-    {p:"$3", t:"Taco de Asada",      d_en:"Grilled beef, onion, cilantro, salsa",                      d_es:"Carne asada a la parrilla, cebolla, cilantro, salsa"},
-    {p:"$3", t:"Taco de Carnitas",   d_en:"Slow-cooked pork, onion, cilantro",                         d_es:"Cerdo cocido a fuego lento, cebolla, cilantro"},
-    {p:"$3", t:"Taco de Barbacoa",   d_en:"Slow-cooked beef cheek, lime, cilantro",                    d_es:"Cachete de res cocido a fuego lento, limón, cilantro"},
-  ],
-  tortas:[
-    {p:"$10",t:"Torta de Milanesa",  d_en:"Breaded beef, lettuce, tomato, avocado",                    d_es:"Res empanizada, lechuga, tomate, aguacate"},
-    {p:"$10",t:"Torta de Carnitas",  d_en:"Slow pork, beans, cheese, jalapeño",                        d_es:"Cerdo cocido, frijoles, queso, jalapeño"},
-    {p:"$9", t:"Torta Cubana",       d_en:"Mixed meats, cheese, jalapeño, everything",                 d_es:"Carnes mixtas, queso, jalapeño, de todo"},
-  ],
-  speciales:[
-    {p:"$12",t:"Bistec con Papas",   d_en:"Sautéed beef with potatoes, rice, beans",                   d_es:"Bistec salteado con papas, arroz, frijoles"},
-    {p:"$13",t:"Chile Relleno",      d_en:"Stuffed poblano, rice, beans, tortillas",                   d_es:"Poblano relleno, arroz, frijoles, tortillas"},
-    {p:"$14",t:"Caldo de Res",       d_en:"Beef soup with vegetables, served with tortillas",          d_es:"Caldo de res con verduras, servido con tortillas"},
-  ],
-  carnes:[
-    {p:"$8/lb",t:"Carne Asada",      d_en:"Marinated grilled beef — ask about custom cuts",            d_es:"Carne asada marinada — pregunta por cortes especiales"},
-    {p:"$7/lb",t:"Carnitas",         d_en:"Slow-cooked pork — by the pound",                          d_es:"Cerdo cocido a fuego lento — por libra"},
-    {p:"$9/lb",t:"Barbacoa",         d_en:"Weekend special — beef cheek, slow cooked",                d_es:"Especial de fin de semana — cachete de res cocido a fuego lento"},
-  ],
-};
 
 /* ============ LANGUAGE ENGINE ============ */
 let currentLang = 'en';
@@ -1021,57 +982,11 @@ function applyLang(lang) {
   });
 
   currentLang = lang;
-  renderAllMenus();
 }
 
 function setLang(lang) {
   applyLang(lang);
 }
-
-/* ============ MENU RENDER ============ */
-function renderMenu(cat) {
-  const panel = document.querySelector('[data-panel="' + cat + '"]');
-  if (!panel) return;
-  panel.innerHTML = MENU[cat].map(it => `
-    <div class="menu-card">
-      <div class="menu-card__price">${it.p}</div>
-      <div>
-        <h4>${it.t}</h4>
-        <p>${currentLang === 'es' ? it.d_es : it.d_en}</p>
-      </div>
-    </div>
-  `).join('');
-}
-function renderAllMenus() {
-  Object.keys(MENU).forEach(function(cat) { renderMenu(cat); });
-}
-renderAllMenus();
-
-const tabs = document.querySelectorAll('[data-tab]');
-const panels = document.querySelectorAll('[data-panel]');
-
-tabs.forEach(function(tab) {
-  tab.addEventListener('click', function() {
-    const target = this.getAttribute('data-tab');
-
-    tabs.forEach(function(t) {
-      t.classList.remove('active');
-    });
-
-    panels.forEach(function(p) {
-      p.style.display = 'none';
-    });
-
-    this.classList.add('active');
-
-    const activePanel = document.querySelector(
-      '[data-panel="' + target + '"]'
-    );
-    if (activePanel) {
-      activePanel.style.display = 'grid';
-    }
-  });
-});
 
 /* ============ NAV SCROLL ============ */
 const nav = document.getElementById('nav');
@@ -1088,7 +1003,7 @@ mobileClose.addEventListener('click', () => { mobileNav.classList.remove('open')
 mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { mobileNav.classList.remove('open'); mobileNav.setAttribute('aria-hidden','true'); }));
 
 /* ============ ACTIVE NAV LINK ============ */
-const sections = ['home','departments','market','specials','about','contact'];
+const sections = ['home','departments','market','partners','about','contact'];
 const navLinks = document.querySelectorAll('.nav__links a');
 window.addEventListener('scroll', () => {
   const y = window.scrollY + 224;
