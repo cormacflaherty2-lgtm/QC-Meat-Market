@@ -72,6 +72,17 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.1}
 .lang-toggle--mobile button.active{background:var(--gold);color:var(--text)}
 
 /* ============ NAV ============ */
+.announcement-banner{
+  width:100%;height:36px;background:var(--red);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);font-weight:600;font-size:var(--t-xs);
+  text-transform:uppercase;letter-spacing:0.1em;color:#fff;
+}
+.announcement-banner .banner-short{display:none}
+@media(max-width:768px){
+  .announcement-banner .banner-full{display:none}
+  .announcement-banner .banner-short{display:inline}
+}
 .nav{
   position:sticky;top:0;left:0;right:0;height:208px;z-index:100;
   background:#fff;border-bottom:2px solid var(--red);
@@ -496,6 +507,11 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.1}
 </style>
 </head>
 <body>
+
+<div class="announcement-banner">
+  <span class="banner-full">🎉 Celebrating 25 Years Serving San Marcos — Thank You!</span>
+  <span class="banner-short">🎉 25 Years Serving San Marcos!</span>
+</div>
 
 <!-- ============== NAV ============== -->
 <header class="nav" id="nav">
