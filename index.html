@@ -308,7 +308,8 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.1}
 .market__details{margin-top:28px;display:flex;flex-direction:column;gap:14px}
 .market__row{display:flex;align-items:center;gap:12px;font-family:var(--font-body);font-weight:500;font-size:var(--t-base);color:#fff}
 .market__row svg{color:var(--gold);flex-shrink:0}
-.market__cta{margin-top:32px;display:inline-flex}
+.market__cta-row{margin-top:32px;display:flex;flex-wrap:wrap;gap:12px}
+@media(max-width:640px){.market__cta-row{flex-direction:column}.market__cta-row .btn-primary{width:100%;justify-content:center}}
 
 .poster{
   background:rgba(0,0,0,0.20);border:2px solid rgba(245,196,0,0.35);
@@ -738,7 +739,10 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.1}
         <div class="market__row"><i data-lucide="music" style="width:18px;height:18px"></i> <span data-i18n="market.row3">Live DJ · Vendors · Kids Attractions</span></div>
         <div class="market__row"><i data-lucide="users" style="width:18px;height:18px"></i> <span data-i18n="market.row4">Free Entry — All Welcome</span></div>
       </div>
-      <a class="btn-primary market__cta" href="https://maps.google.com/?q=1105+TX+Hwy+125+San+Marcos+TX" target="_blank" rel="noopener noreferrer" data-i18n="market.cta">Get Directions →</a>
+      <div class="market__cta-row">
+        <a class="btn-primary" href="https://maps.google.com/?q=1105+TX+Hwy+125+San+Marcos+TX" target="_blank" rel="noopener noreferrer" data-i18n="market.cta">Get Directions →</a>
+        <button type="button" class="btn-primary" id="vendor-btn">Apply as a Vendor →</button>
+      </div>
     </div>
     <div class="poster">
       <div class="poster__date-bar" data-i18n="poster.datebar">This Sunday · April 19</div>
@@ -758,6 +762,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.1}
     </div>
   </div>
 
+  <div id="vendor-form-container" style="display:none">
   <div class="vendor-form-wrap">
     <span class="vf-overline">Want to Sell at the Market?</span>
     <h3>Apply for a Vendor Spot</h3>
@@ -810,6 +815,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.1}
 
       <button type="submit" class="vf-submit">Apply for a Vendor Spot</button>
     </form>
+  </div>
   </div>
 </section>
 
@@ -1199,6 +1205,13 @@ window.addEventListener('scroll', () => {
     if (el && el.offsetTop <= y) cur = id;
   }
   navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + cur));
+});
+
+document.getElementById('vendor-btn').addEventListener('click', function() {
+  const container = document.getElementById('vendor-form-container');
+  container.style.display = 'block';
+  container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  this.style.display = 'none';
 });
 
 lucide.createIcons();
