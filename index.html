@@ -659,13 +659,17 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.1}
     <h2 class="section-h2" data-i18n="specials.h2">Made Fresh Every Day</h2>
     <p class="section-lede" data-i18n="specials.lede">Full breakfast, lunch, tacos, tortas, carnes, and daily specials. Dine in at the taqueria counter or take it to go.</p>
     <div class="tabs" role="tablist">
-      <button class="tab active" data-cat="breakfast" role="tab" data-i18n="tab.breakfast">Breakfast</button>
-      <button class="tab" data-cat="tacos" role="tab" data-i18n="tab.tacos">Tacos</button>
-      <button class="tab" data-cat="tortas" role="tab" data-i18n="tab.tortas">Tortas</button>
-      <button class="tab" data-cat="speciales" role="tab" data-i18n="tab.speciales">Speciales</button>
-      <button class="tab" data-cat="carnes" role="tab" data-i18n="tab.carnes">Carnes</button>
+      <button class="tab active" data-tab="breakfast" data-cat="breakfast" role="tab" data-i18n="tab.breakfast">Breakfast</button>
+      <button class="tab" data-tab="tacos" data-cat="tacos" role="tab" data-i18n="tab.tacos">Tacos</button>
+      <button class="tab" data-tab="tortas" data-cat="tortas" role="tab" data-i18n="tab.tortas">Tortas</button>
+      <button class="tab" data-tab="speciales" data-cat="speciales" role="tab" data-i18n="tab.speciales">Speciales</button>
+      <button class="tab" data-tab="carnes" data-cat="carnes" role="tab" data-i18n="tab.carnes">Carnes</button>
     </div>
-    <div class="menu-grid" id="menuGrid"></div>
+    <div class="menu-grid" data-panel="breakfast"></div>
+    <div class="menu-grid" data-panel="tacos" style="display:none"></div>
+    <div class="menu-grid" data-panel="tortas" style="display:none"></div>
+    <div class="menu-grid" data-panel="speciales" style="display:none"></div>
+    <div class="menu-grid" data-panel="carnes" style="display:none"></div>
   </div>
 </section>
 
@@ -1017,7 +1021,7 @@ function applyLang(lang) {
   });
 
   currentLang = lang;
-  renderMenu(document.querySelector('.tab.active').dataset.cat);
+  renderAllMenus();
 }
 
 function setLang(lang) {
@@ -1026,8 +1030,9 @@ function setLang(lang) {
 
 /* ============ MENU RENDER ============ */
 function renderMenu(cat) {
-  const grid = document.getElementById('menuGrid');
-  grid.innerHTML = MENU[cat].map(it => `
+  const panel = document.querySelector('[data-panel="' + cat + '"]');
+  if (!panel) return;
+  panel.innerHTML = MENU[cat].map(it => `
     <div class="menu-card">
       <div class="menu-card__price">${it.p}</div>
       <div>
@@ -1037,14 +1042,35 @@ function renderMenu(cat) {
     </div>
   `).join('');
 }
-renderMenu('breakfast');
+function renderAllMenus() {
+  Object.keys(MENU).forEach(function(cat) { renderMenu(cat); });
+}
+renderAllMenus();
 
-document.querySelector('.tabs').addEventListener('click', e => {
-  const clicked = e.target.closest('.tab');
-  if (!clicked) return;
-  document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
-  clicked.classList.add('active');
-  renderMenu(clicked.dataset.cat);
+const tabs = document.querySelectorAll('[data-tab]');
+const panels = document.querySelectorAll('[data-panel]');
+
+tabs.forEach(function(tab) {
+  tab.addEventListener('click', function() {
+    const target = this.getAttribute('data-tab');
+
+    tabs.forEach(function(t) {
+      t.classList.remove('active');
+    });
+
+    panels.forEach(function(p) {
+      p.style.display = 'none';
+    });
+
+    this.classList.add('active');
+
+    const activePanel = document.querySelector(
+      '[data-panel="' + target + '"]'
+    );
+    if (activePanel) {
+      activePanel.style.display = 'grid';
+    }
+  });
 });
 
 /* ============ NAV SCROLL ============ */
